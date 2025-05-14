@@ -197,7 +197,7 @@ def main():
         choice = input("Select an option: ")
 
      
-        try:
+     try:
             if choice == "1":
                 print("Select Product Type: 1) Electronics 2) Grocery 3) Clothing")
                 ptype = input("Choice: ")
@@ -259,10 +259,10 @@ def main():
             else:
                 print("Invalid option.")
 
-       except InventoryError as e:
+      except InventoryError as e:
             print(f"[⚠️Upppsss Error]: {e}")
 
-       except Exception as e:
+      except Exception as e:
             print(f"[❌Something wrong!]: {e}")
 
 
