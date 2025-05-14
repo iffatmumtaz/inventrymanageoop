@@ -259,10 +259,10 @@ try:
             else:
                 print("Invalid option.")
 
-        except InventoryError as e:
+    except InventoryError as e:
             print(f"[⚠️Upppsss Error]: {e}")
 
-        except Exception as e:
+    except Exception as e:
             print(f"[❌Something wrong!]: {e}")
 
 
