@@ -80,6 +80,7 @@ Save inventory to JSON file with full data.
 Load inventory from JSON while correctly reconstructing the appropriate subclasses (Electronics, Grocery, Clothing).
 
 💡 Concepts Demonstrated
+
 ✅ Abstraction (abc module)
 
 ✅ Inheritance & Polymorphism
