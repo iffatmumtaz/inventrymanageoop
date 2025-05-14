@@ -14,8 +14,7 @@ class OutOfStockError(InventoryError):
 class InvalidProductDataError(InventoryError):
     pass
 
-#ABSTRACTION
-
+# ABSTRACTION
 class Product(ABC):
     def __init__(self, product_id, name, price, quantity_in_stock):
         self._product_id = product_id
@@ -43,8 +42,8 @@ class Product(ABC):
 
     def get_total_value(self):
         return self._price * self._quantity_in_stock
-#SUBCLASS
 
+# SUBCLASS
 class Electronics(Product):
     def __init__(self, product_id, name, price, quantity_in_stock, brand, warranty_years):
         super().__init__(product_id, name, price, quantity_in_stock)
@@ -65,7 +64,6 @@ class Electronics(Product):
             "brand": self._brand,
             "warranty_years": self._warranty_years
         }
-
 
 class Grocery(Product):
     def __init__(self, product_id, name, price, quantity_in_stock, expiry_date):
@@ -92,7 +90,6 @@ class Grocery(Product):
         expiry = datetime.strptime(self._expiry_date, "%Y-%m-%d").date()
         return today > expiry
 
-
 class Clothing(Product):
     def __init__(self, product_id, name, price, quantity_in_stock, size, material):
         super().__init__(product_id, name, price, quantity_in_stock)
@@ -114,9 +111,7 @@ class Clothing(Product):
             "material": self._material
         }
 
-
-#INVENTORY
-
+# INVENTORY
 class Inventory:
     def __init__(self):
         self._products = {}
@@ -184,7 +179,6 @@ def main():
 
     while True:
         print("\n--- Inventory Management System ---")
-
         print("1. Add Product")
         print("2. Sell Product")
         print("3. Search Product by Name")
@@ -196,8 +190,7 @@ def main():
 
         choice = input("Select an option: ")
 
-     
-    try:
+        try:
             if choice == "1":
                 print("Select Product Type: 1) Electronics 2) Grocery 3) Clothing")
                 ptype = input("Choice: ")
@@ -220,13 +213,13 @@ def main():
                     print("Invalid type.")
                     continue
                 inventory.add_product(product)
-                print("✅Product added successfully.")
+                print("✅ Product added successfully.")
 
             elif choice == "2":
                 pid = input("Product ID: ")
                 quantity = int(input("Quantity to Sell: "))
                 inventory.sell_product(pid, quantity)
-                print("✅Product sold successfully.")
+                print("✅ Product sold successfully.")
 
             elif choice == "3":
                 name = input("Enter name to search: ")
@@ -241,16 +234,16 @@ def main():
             elif choice == "5":
                 filename = input("Filename to save (e.g., inventory.json): ")
                 inventory.save_to_file(filename)
-                print("✅Inventory saved successfully.")
+                print("✅ Inventory saved successfully.")
 
             elif choice == "6":
                 filename = input("Filename to load (e.g., inventory.json): ")
                 inventory.load_from_file(filename)
-                print("✅Inventory loaded successfully.")
+                print("✅ Inventory loaded successfully.")
 
             elif choice == "7":
                 inventory.remove_expired_products()
-                print("Expired products removed.")
+                print("✅ Expired products removed.")
 
             elif choice == "8":
                 print("Exiting system...")
@@ -259,12 +252,11 @@ def main():
             else:
                 print("Invalid option.")
 
-      except InventoryError as e:
-            print(f"[⚠️Upppsss Error]: {e}")
+        except InventoryError as e:
+            print(f"[⚠️ Inventory Error]: {e}")
 
-      except Exception as e:
-            print(f"[❌Something wrong!]: {e}")
-
+        except Exception as e:
+            print(f"[❌ Unexpected Error]: {e}")
 
 if __name__ == "__main__":
     main()
