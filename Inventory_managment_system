@@ -2,8 +2,6 @@ import json
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-
-# ---------------------- Custom Exceptions ----------------------
 class InventoryError(Exception):
     pass
 
@@ -16,8 +14,8 @@ class OutOfStockError(InventoryError):
 class InvalidProductDataError(InventoryError):
     pass
 
+#ABSTRACTION
 
-# ---------------------- Abstract Product ----------------------
 class Product(ABC):
     def __init__(self, product_id, name, price, quantity_in_stock):
         self._product_id = product_id
@@ -45,9 +43,8 @@ class Product(ABC):
 
     def get_total_value(self):
         return self._price * self._quantity_in_stock
+#SUBCLASS
 
-
-# ---------------------- Subclasses ----------------------
 class Electronics(Product):
     def __init__(self, product_id, name, price, quantity_in_stock, brand, warranty_years):
         super().__init__(product_id, name, price, quantity_in_stock)
@@ -118,7 +115,8 @@ class Clothing(Product):
         }
 
 
-# ---------------------- Inventory ----------------------
+#INVENTORY
+
 class Inventory:
     def __init__(self):
         self._products = {}
@@ -181,13 +179,12 @@ class Inventory:
         except (json.JSONDecodeError, KeyError) as e:
             raise InvalidProductDataError("Invalid product data in file.") from e
 
-
-# ---------------------- CLI Menu ----------------------
 def main():
     inventory = Inventory()
 
     while True:
         print("\n--- Inventory Management System ---")
+
         print("1. Add Product")
         print("2. Sell Product")
         print("3. Search Product by Name")
@@ -199,7 +196,7 @@ def main():
 
         choice = input("Select an option: ")
 
-        try:
+      try:
             if choice == "1":
                 print("Select Product Type: 1) Electronics 2) Grocery 3) Clothing")
                 ptype = input("Choice: ")
@@ -222,13 +219,13 @@ def main():
                     print("Invalid type.")
                     continue
                 inventory.add_product(product)
-                print("Product added successfully.")
+                print("✅Product added successfully.")
 
             elif choice == "2":
                 pid = input("Product ID: ")
                 quantity = int(input("Quantity to Sell: "))
                 inventory.sell_product(pid, quantity)
-                print("Product sold successfully.")
+                print("✅Product sold successfully.")
 
             elif choice == "3":
                 name = input("Enter name to search: ")
@@ -243,12 +240,12 @@ def main():
             elif choice == "5":
                 filename = input("Filename to save (e.g., inventory.json): ")
                 inventory.save_to_file(filename)
-                print("Inventory saved successfully.")
+                print("✅Inventory saved successfully.")
 
             elif choice == "6":
                 filename = input("Filename to load (e.g., inventory.json): ")
                 inventory.load_from_file(filename)
-                print("Inventory loaded successfully.")
+                print("✅Inventory loaded successfully.")
 
             elif choice == "7":
                 inventory.remove_expired_products()
@@ -262,10 +259,10 @@ def main():
                 print("Invalid option.")
 
         except InventoryError as e:
-            print(f"[Error]: {e}")
+            print(f"[⚠️Upppsss Error]: {e}")
 
         except Exception as e:
-            print(f"[Unhandled Error]: {e}")
+            print(f"[❌Something wrong!]: {e}")
 
 
 if __name__ == "__main__":
