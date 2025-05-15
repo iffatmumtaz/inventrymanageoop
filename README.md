@@ -1,4 +1,4 @@
-📦 Advanced OOP Inventory Management System (Python)
+# 📦 Advanced OOP Inventory Management System (Python)
 🎯 Objective
 This project is a robust Inventory Management System built using Object-Oriented Programming (OOP) principles in Python.
 It can manage different product types, handle stock operations, process sales, and persist data using JSON files.
